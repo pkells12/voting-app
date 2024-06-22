@@ -9,9 +9,20 @@ if ('serviceWorker' in navigator) {
     });
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    const voteNowBtn = document.getElementById('vote-now-btn');
+    if (voteNowBtn) {
+        voteNowBtn.addEventListener('click', () => {
+            window.location.href = 'vote.html';
+        });
+    }
+});
+
 function vote(option) {
     let sats = prompt("How many sats do you want to contribute?");
     if (sats !== null) {
+        let tally = document.getElementById(`${option}-tally`);
+        tally.innerText = parseInt(tally.innerText) + parseInt(sats);
         alert(`You voted ${sats} sats for ${option}!`);
     }
 }
